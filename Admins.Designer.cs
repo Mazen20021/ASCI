@@ -32,8 +32,6 @@ namespace ASCI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASCI));
             this.panel1 = new System.Windows.Forms.Panel();
             this.timetext = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Tapspage = new System.Windows.Forms.TabControl();
             this.MainPage = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
@@ -66,7 +64,6 @@ namespace ASCI
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.Tapspage.SuspendLayout();
             this.MainPage.SuspendLayout();
             this.Employees.SuspendLayout();
@@ -78,10 +75,9 @@ namespace ASCI
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(183)))), ((int)(((byte)(184)))));
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(99)))), ((int)(((byte)(101)))));
+            this.panel1.BackgroundImage = global::ASCI.Properties.Resources.Back;
             this.panel1.Controls.Add(this.timetext);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.Tapspage);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
@@ -89,6 +85,7 @@ namespace ASCI
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(-5, -3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(811, 462);
@@ -97,31 +94,13 @@ namespace ASCI
             // timetext
             // 
             this.timetext.AutoSize = true;
-            this.timetext.Location = new System.Drawing.Point(30, 415);
+            this.timetext.BackColor = System.Drawing.Color.Transparent;
+            this.timetext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.timetext.Location = new System.Drawing.Point(32, 47);
             this.timetext.Name = "timetext";
             this.timetext.Size = new System.Drawing.Size(112, 32);
             this.timetext.TabIndex = 12;
             this.timetext.Text = "00:00:00";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(50, 376);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 32);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Time";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = global::ASCI.Properties.Resources.Pictogrammers_Material_Account_circle_outline1;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(167, 130);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
             // 
             // Tapspage
             // 
@@ -130,14 +109,15 @@ namespace ASCI
             this.Tapspage.Controls.Add(this.atendance);
             this.Tapspage.Controls.Add(this.feedback);
             this.Tapspage.Controls.Add(this.settings);
-            this.Tapspage.Location = new System.Drawing.Point(169, 3);
+            this.Tapspage.Location = new System.Drawing.Point(168, 0);
             this.Tapspage.Name = "Tapspage";
             this.Tapspage.SelectedIndex = 0;
-            this.Tapspage.Size = new System.Drawing.Size(639, 456);
+            this.Tapspage.Size = new System.Drawing.Size(640, 459);
             this.Tapspage.TabIndex = 0;
             // 
             // MainPage
             // 
+            this.MainPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(118)))), ((int)(((byte)(100)))));
             this.MainPage.Controls.Add(this.button6);
             this.MainPage.Controls.Add(this.Responsetext);
             this.MainPage.Controls.Add(this.BotResponse);
@@ -145,42 +125,46 @@ namespace ASCI
             this.MainPage.Location = new System.Drawing.Point(4, 41);
             this.MainPage.Name = "MainPage";
             this.MainPage.Padding = new System.Windows.Forms.Padding(3);
-            this.MainPage.Size = new System.Drawing.Size(631, 411);
+            this.MainPage.Size = new System.Drawing.Size(631, 414);
             this.MainPage.TabIndex = 0;
             this.MainPage.Text = "Mainpage";
-            this.MainPage.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(99)))), ((int)(((byte)(101)))));
+            this.button6.BackColor = System.Drawing.Color.Transparent;
             this.button6.BackgroundImage = global::ASCI.Properties.Resources.send;
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button6.FlatAppearance.BorderSize = 2;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(571, 379);
+            this.button6.Location = new System.Drawing.Point(542, 389);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(54, 29);
+            this.button6.Size = new System.Drawing.Size(78, 50);
             this.button6.TabIndex = 2;
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Responsetext
             // 
-            this.Responsetext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(99)))), ((int)(((byte)(101)))));
+            this.Responsetext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(118)))), ((int)(((byte)(100)))));
             this.Responsetext.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.Responsetext.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Responsetext.ForeColor = System.Drawing.SystemColors.Info;
-            this.Responsetext.Location = new System.Drawing.Point(0, 379);
+            this.Responsetext.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Responsetext.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Responsetext.Location = new System.Drawing.Point(12, 389);
             this.Responsetext.Name = "Responsetext";
-            this.Responsetext.Size = new System.Drawing.Size(568, 29);
+            this.Responsetext.Size = new System.Drawing.Size(524, 50);
             this.Responsetext.TabIndex = 1;
             // 
             // BotResponse
             // 
-            this.BotResponse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(99)))), ((int)(((byte)(101)))));
+            this.BotResponse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(118)))), ((int)(((byte)(100)))));
+            this.BotResponse.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BotResponse.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BotResponse.ForeColor = System.Drawing.SystemColors.Info;
             this.BotResponse.Location = new System.Drawing.Point(0, 0);
             this.BotResponse.Name = "BotResponse";
             this.BotResponse.ReadOnly = true;
-            this.BotResponse.Size = new System.Drawing.Size(631, 411);
+            this.BotResponse.Size = new System.Drawing.Size(631, 383);
             this.BotResponse.TabIndex = 0;
             this.BotResponse.Text = "";
             // 
@@ -195,6 +179,7 @@ namespace ASCI
             // 
             // Employees
             // 
+            this.Employees.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(115)))), ((int)(((byte)(118)))));
             this.Employees.Controls.Add(this.button9);
             this.Employees.Controls.Add(this.button8);
             this.Employees.Controls.Add(this.empname);
@@ -203,16 +188,20 @@ namespace ASCI
             this.Employees.Location = new System.Drawing.Point(4, 41);
             this.Employees.Name = "Employees";
             this.Employees.Padding = new System.Windows.Forms.Padding(3);
-            this.Employees.Size = new System.Drawing.Size(631, 411);
+            this.Employees.Size = new System.Drawing.Size(631, 414);
             this.Employees.TabIndex = 1;
             this.Employees.Text = "Employee";
-            this.Employees.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(442, 319);
+            this.button9.FlatAppearance.BorderSize = 2;
+            this.button9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button9.Location = new System.Drawing.Point(161, 379);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(178, 46);
+            this.button9.Size = new System.Drawing.Size(285, 32);
             this.button9.TabIndex = 5;
             this.button9.Text = "Remove";
             this.button9.UseVisualStyleBackColor = true;
@@ -220,9 +209,14 @@ namespace ASCI
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(3, 319);
+            this.button8.FlatAppearance.BorderSize = 2;
+            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button8.Location = new System.Drawing.Point(161, 345);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(170, 46);
+            this.button8.Size = new System.Drawing.Size(285, 32);
             this.button8.TabIndex = 4;
             this.button8.Text = "ADD";
             this.button8.UseVisualStyleBackColor = true;
@@ -230,28 +224,31 @@ namespace ASCI
             // 
             // empname
             // 
-            this.empname.Location = new System.Drawing.Point(266, 274);
+            this.empname.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.empname.Location = new System.Drawing.Point(312, 305);
             this.empname.Name = "empname";
-            this.empname.Size = new System.Drawing.Size(354, 39);
+            this.empname.Size = new System.Drawing.Size(316, 33);
             this.empname.TabIndex = 3;
             this.empname.Text = "Name";
             // 
             // empid
             // 
-            this.empid.Location = new System.Drawing.Point(3, 274);
+            this.empid.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.empid.Location = new System.Drawing.Point(3, 305);
             this.empid.Name = "empid";
-            this.empid.Size = new System.Drawing.Size(257, 39);
+            this.empid.Size = new System.Drawing.Size(303, 33);
             this.empid.TabIndex = 1;
             this.empid.Text = "ID";
             // 
             // Empdata
             // 
+            this.Empdata.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(115)))), ((int)(((byte)(118)))));
             this.Empdata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Empdata.Location = new System.Drawing.Point(3, 6);
+            this.Empdata.Location = new System.Drawing.Point(3, 0);
             this.Empdata.Name = "Empdata";
             this.Empdata.RowHeadersWidth = 51;
             this.Empdata.RowTemplate.Height = 25;
-            this.Empdata.Size = new System.Drawing.Size(617, 262);
+            this.Empdata.Size = new System.Drawing.Size(625, 302);
             this.Empdata.TabIndex = 0;
             // 
             // atendance
@@ -261,13 +258,14 @@ namespace ASCI
             this.atendance.Location = new System.Drawing.Point(4, 41);
             this.atendance.Name = "atendance";
             this.atendance.Padding = new System.Windows.Forms.Padding(3);
-            this.atendance.Size = new System.Drawing.Size(631, 411);
+            this.atendance.Size = new System.Drawing.Size(631, 414);
             this.atendance.TabIndex = 2;
             this.atendance.Text = "Attendance";
             this.atendance.UseVisualStyleBackColor = true;
             // 
             // attendancedata
             // 
+            this.attendancedata.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(115)))), ((int)(((byte)(118)))));
             this.attendancedata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.attendancedata.Location = new System.Drawing.Point(-2, -2);
             this.attendancedata.Name = "attendancedata";
@@ -278,18 +276,17 @@ namespace ASCI
             // 
             // feedback
             // 
+            this.feedback.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(115)))), ((int)(((byte)(118)))));
             this.feedback.Location = new System.Drawing.Point(4, 41);
             this.feedback.Name = "feedback";
             this.feedback.Padding = new System.Windows.Forms.Padding(3);
-            this.feedback.Size = new System.Drawing.Size(631, 411);
+            this.feedback.Size = new System.Drawing.Size(632, 414);
             this.feedback.TabIndex = 3;
             this.feedback.Text = "FeedBack";
-            this.feedback.UseVisualStyleBackColor = true;
             // 
             // settings
             // 
-            this.settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(43)))), ((int)(((byte)(47)))));
-            this.settings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.settings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(76)))), ((int)(((byte)(66)))));
             this.settings.Controls.Add(this.button10);
             this.settings.Controls.Add(this.joinedtext);
             this.settings.Controls.Add(this.label6);
@@ -303,12 +300,17 @@ namespace ASCI
             this.settings.Location = new System.Drawing.Point(4, 41);
             this.settings.Name = "settings";
             this.settings.Padding = new System.Windows.Forms.Padding(3);
-            this.settings.Size = new System.Drawing.Size(631, 411);
+            this.settings.Size = new System.Drawing.Size(632, 414);
             this.settings.TabIndex = 4;
             this.settings.Text = "Settings";
             // 
             // button10
             // 
+            this.button10.FlatAppearance.BorderSize = 3;
+            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button10.Location = new System.Drawing.Point(320, 193);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(171, 39);
@@ -367,6 +369,10 @@ namespace ASCI
             // 
             // button7
             // 
+            this.button7.FlatAppearance.BorderSize = 3;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Location = new System.Drawing.Point(143, 326);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(348, 50);
@@ -403,64 +409,84 @@ namespace ASCI
             // 
             // button5
             // 
+            this.button5.BackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(0, 306);
+            this.button5.Location = new System.Drawing.Point(-6, 411);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(185, 44);
             this.button5.TabIndex = 5;
             this.button5.Text = "Logout";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
+            this.button4.BackColor = System.Drawing.Color.Transparent;
+            this.button4.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(0, 134);
+            this.button4.Location = new System.Drawing.Point(-6, 170);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(185, 44);
             this.button4.TabIndex = 9;
             this.button4.Text = "Employees";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(0, 263);
+            this.button3.Location = new System.Drawing.Point(-6, 299);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(185, 44);
             this.button3.TabIndex = 8;
             this.button3.Text = "Settings";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(0, 220);
+            this.button2.Location = new System.Drawing.Point(-6, 256);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(185, 44);
             this.button2.TabIndex = 7;
             this.button2.Text = "FeedBack";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(86)))), ((int)(((byte)(4)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(0, 177);
+            this.button1.Location = new System.Drawing.Point(-6, 213);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(185, 44);
             this.button1.TabIndex = 6;
             this.button1.Text = "Atendance";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ASCI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 452);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -470,7 +496,6 @@ namespace ASCI
             this.Load += new System.EventHandler(this.ASCI_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.Tapspage.ResumeLayout(false);
             this.MainPage.ResumeLayout(false);
             this.MainPage.PerformLayout();
@@ -488,7 +513,6 @@ namespace ASCI
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TabControl Tapspage;
         private System.Windows.Forms.TabPage MainPage;
         private System.Windows.Forms.TabPage Employees;
@@ -519,7 +543,6 @@ namespace ASCI
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox changedid;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Label label5;
         public System.Windows.Forms.Label timetext;
         private System.Windows.Forms.DataGridView attendancedata;
     }

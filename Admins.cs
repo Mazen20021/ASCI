@@ -21,6 +21,7 @@ namespace ASCI
         bool waiting = false;
         bool found = false;
         int aids = 0;
+        int attended = 0;
         bool withkey = false;
         private static List<int> generatedIDs = new List<int>(); // Keep track of generated IDs
         private List<string> empnames = new List<string>();
@@ -32,7 +33,6 @@ namespace ASCI
             settimer();
             bot("");
            // fillattendancetable();
-
             //setserial();
         }
         public ASCI(string tags)
@@ -99,17 +99,71 @@ namespace ASCI
             }
             return empnames;
         }
+        private int getattended()
+        {
+            
+            try
+            {
+                sql = "Select Count(Name) From Attendance Where Arrived != 0";
+                cmd = new SQLiteCommand(sql, c.getconnetion());
+                attended = Convert.ToInt32(cmd.ExecuteScalar());
+                
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error Couldn't Get Count of Attended Dueto: " + ex, "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return attended;
+        }
+        private List<string> getattendednames()
+        {
+            List<string> names_attneded = new List<string>();
+            try
+            {
+                sql = "Select Name from Attendance Where Arrived != 0";
+                cmd = new SQLiteCommand(sql, c.getconnetion());
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    names_attneded.Add(dr["Name"].ToString());
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error Couldn't Get Name of Attended Dueto: " + ex, "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return names_attneded;
+        }
+        private List<string> getnotattendednames()
+        {
+            List<string> names_notattneded = new List<string>(); ;
+            try
+            {
+                sql = "Select Name from Attendance Where Arrived = 0";
+                cmd = new SQLiteCommand(sql, c.getconnetion());
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    names_notattneded.Add(dr["Name"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Couldn't Get Name of Attended Dueto: " + ex, "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return names_notattneded;
+        }
         private void bot(string message)
         {
             int count = GetCount();
             List<string> empNames = names();
+            List<string> attempNames = getattendednames();
+            List<string> attempnotNames = getnotattendednames();
             if (waiting == false && message == "")
             {
-                BotResponse.AppendText("[Bot01]: My Name is Bot01, I am here to help you. Here are some commands that you can use so we could communicate\n");
-                BotResponse.AppendText(" 1- Show Me Employees (1/Employees)\n");
-                BotResponse.AppendText(" 2- FeedBack (2/FeedBack)\n");
-                BotResponse.AppendText(" 3- Tell Me About YourSelf (3/YourSelf)\n");
-                BotResponse.AppendText(" 4- Tell Me About The Team (4/Team)\n");
+                BotResponse.AppendText("[Bot01]: My Name is Bot01, I am here to help you, Here are some commands that you can use so we could communicate\n");
+                BotResponse.AppendText("  1- Show Me Employees (1/Employees)\n");
+                BotResponse.AppendText("  2- FeedBack (2/FeedBack)\n");
+                BotResponse.AppendText("  3- Tell Me About YourSelf (3/YourSelf)\n");
+                BotResponse.AppendText("  4- Tell Me About The Team (4/Team)\n");
                 waiting = true;
             }
             else
@@ -127,8 +181,16 @@ namespace ASCI
                 else if (message.Contains("FeedBack") || message.Contains("feedback") || message.Contains("2"))
                 {
                     BotResponse.Text += "[Bot01]: Here what you asked for Sir " + nametext.Text + " (FeedBack)\n";
-                    BotResponse.Text += "[Bot01]: There are (num) of employees who attended today and they are (names)\n";
-                    BotResponse.Text += "[Bot01]: There are (num) of employees who didn't attent today and they are (names)\n";
+                    BotResponse.Text += "[Bot01]: There are (" + getattended() + ") Who Came Today\n";
+                    for(int j = 0; j < attended; j++)
+                    {
+                       BotResponse.Text += "[Bot01]: They are (" + attempNames[j] + ")\n";
+                    }
+                    BotResponse.Text += "[Bot01]: There are " + (count - getattended()) + " Who Didn't come Today\n";
+                    for (int t = 0; t < count - getattended(); t++)
+                    {
+                        BotResponse.Text += "[Bot01]: They are (" + attempnotNames[t] + ")\n";
+                    }
                     waiting = true;
                 }
                 else if (message.Contains("yourself") || message.Contains("Yourself") || message.Contains("Your") || message.Contains("your") || message.Contains("3"))
@@ -139,10 +201,10 @@ namespace ASCI
                 else if (message.Contains("Hi") || message.Contains("hi"))
                 {
                     BotResponse.AppendText("[Bot01]: Hello Sir " + nametext.Text + " My Name is Bot01, I am here to help you. Here are some commands that you can use so we could communicate\n");
-                    BotResponse.AppendText(" 1- Show Me Employees (1/Employees)\n");
-                    BotResponse.AppendText(" 2- FeedBack (2/FeedBack)\n");
-                    BotResponse.AppendText(" 3- Tell Me About YourSelf (3/YourSelf)\n");
-                    BotResponse.AppendText(" 4- Tell Me About The Team (4/Team)\n");;
+                    BotResponse.AppendText("  1- Show Me Employees (1/Employees)\n");
+                    BotResponse.AppendText("  2- FeedBack (2/FeedBack)\n");
+                    BotResponse.AppendText("  3- Tell Me About YourSelf (3/YourSelf)\n");
+                    BotResponse.AppendText("  4- Tell Me About The Team (4/Team)\n");;
                     waiting = true;
                 }
                 else if (message.Contains("Team") || message.Contains("team") || message.Contains("4"))
@@ -157,26 +219,27 @@ namespace ASCI
                 }
                 else if (message.Contains("Functions") || message.Contains("functions") || message.Contains("help") || message.Contains("Help"))
                 {
-                    BotResponse.AppendText("[Bot01]: Hello Sir " + nametext.Text + " My Name is Bot01, I am here to help you. Here are some commands that you can use so we could communicate\n");
-                    BotResponse.AppendText(" 1- Show Me Employees (1/Employees)\n");
-                    BotResponse.AppendText(" 2- FeedBack (2/FeedBack)\n");
-                    BotResponse.AppendText(" 3- Tell Me About YourSelf (3/YourSelf)\n");
-                    BotResponse.AppendText(" 4- Tell Me About The Team (4/Team)\n");
+                    BotResponse.AppendText("[Bot01]: Hello Sir " + nametext.Text + " My Name is Bot01, I am here to help you, Here are some commands that you can use so we could communicate\n");
+                    BotResponse.AppendText("  1- Show Me Employees (1/Employees)\n");
+                    BotResponse.AppendText("  2- FeedBack (2/FeedBack)\n");
+                    BotResponse.AppendText("  3- Tell Me About YourSelf (3/YourSelf)\n");
+                    BotResponse.AppendText("  4- Tell Me About The Team (4/Team)\n");
                     waiting = true;
                 }
                 else
                 {
-                    BotResponse.Text += "[Bot01]: Sorry I Didn't Get That Please Choose From Above List\n";
+                    BotResponse.Text += "[Bot01]: Sorry I Didn't Get That Please Choose From Above List (1,2,3,4)\n";
                     waiting = true;
                 }
             }
         }
         private void button6_Click(object sender, EventArgs e)
             {
-            BotResponse.Text += Responsetext.Text;
+            string modified_message = "[" + nametext.Text + "]: " + Responsetext.Text;
+            BotResponse.Text += modified_message;
             BotResponse.Text += "\n";
             waiting = false;
-            bot(Responsetext.Text);
+            bot(modified_message);
         }
         public void getname(string name)
         {
@@ -527,22 +590,45 @@ namespace ASCI
                 }
                 else
                 {
-                    try
+                    if(!withkey)
                     {
-                        c.connect();
-                        sql = "UPDATE Admins SET ID = @ID WHERE ID = @Aids";
-                        cmd = new SQLiteCommand(sql, c.getconnetion());
-                        cmd.Parameters.AddWithValue("@ID", changedid.Text);
-                        cmd.Parameters.AddWithValue("@Aids", Aids);
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("ID Changed", "ID Changed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        changedid.Text = "ID";
-                        confirmchid.Text = "Confirm ID";
+                        try
+                        {
+                            c.connect();
+                            sql = "UPDATE Admins SET ID = @ID WHERE ID = @Aids";
+                            cmd = new SQLiteCommand(sql, c.getconnetion());
+                            cmd.Parameters.AddWithValue("@ID", changedid.Text);
+                            cmd.Parameters.AddWithValue("@Aids", Aids);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("ID Changed", "ID Changed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            changedid.Text = "ID";
+                            confirmchid.Text = "Confirm ID";
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error Couldn't Change ID Dueto: " + ex, "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Error Couldn't Change ID Dueto: " + ex, "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        try
+                        {
+                            c.connect();
+                            sql = "UPDATE Admins SET ID = @ID WHERE ID = @Aids";
+                            cmd = new SQLiteCommand(sql, c.getconnetion());
+                            cmd.Parameters.AddWithValue("@ID", changedid.Text);
+                            cmd.Parameters.AddWithValue("@Aids", aids);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("ID Changed", "ID Changed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            changedid.Text = "ID";
+                            confirmchid.Text = "Confirm ID";
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error Couldn't Change ID Dueto: " + ex, "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
+                    
                 }
             }
         }
@@ -551,5 +637,6 @@ namespace ASCI
         {
             settimer();
         }
+
     }
 }
