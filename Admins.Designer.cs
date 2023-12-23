@@ -47,6 +47,7 @@ namespace ASCI
             this.atendance = new System.Windows.Forms.TabPage();
             this.attendancedata = new System.Windows.Forms.DataGridView();
             this.feedback = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.settings = new System.Windows.Forms.TabPage();
             this.button10 = new System.Windows.Forms.Button();
             this.joinedtext = new System.Windows.Forms.Label();
@@ -70,13 +71,15 @@ namespace ASCI
             ((System.ComponentModel.ISupportInitialize)(this.Empdata)).BeginInit();
             this.atendance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attendancedata)).BeginInit();
+            this.feedback.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.settings.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(99)))), ((int)(((byte)(101)))));
-            this.panel1.BackgroundImage = global::ASCI.Properties.Resources.Back;
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.Controls.Add(this.timetext);
             this.panel1.Controls.Add(this.Tapspage);
             this.panel1.Controls.Add(this.button5);
@@ -124,15 +127,15 @@ namespace ASCI
             this.MainPage.Controls.Add(this.nametext);
             this.MainPage.Location = new System.Drawing.Point(4, 41);
             this.MainPage.Name = "MainPage";
-            this.MainPage.Padding = new System.Windows.Forms.Padding(3);
-            this.MainPage.Size = new System.Drawing.Size(631, 414);
+            this.MainPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.MainPage.Size = new System.Drawing.Size(632, 414);
             this.MainPage.TabIndex = 0;
             this.MainPage.Text = "Mainpage";
             // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.Transparent;
-            this.button6.BackgroundImage = global::ASCI.Properties.Resources.send;
+            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
             this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button6.FlatAppearance.BorderSize = 2;
@@ -187,8 +190,8 @@ namespace ASCI
             this.Employees.Controls.Add(this.Empdata);
             this.Employees.Location = new System.Drawing.Point(4, 41);
             this.Employees.Name = "Employees";
-            this.Employees.Padding = new System.Windows.Forms.Padding(3);
-            this.Employees.Size = new System.Drawing.Size(631, 414);
+            this.Employees.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Employees.Size = new System.Drawing.Size(632, 414);
             this.Employees.TabIndex = 1;
             this.Employees.Text = "Employee";
             // 
@@ -242,13 +245,13 @@ namespace ASCI
             // 
             // Empdata
             // 
-            this.Empdata.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(115)))), ((int)(((byte)(118)))));
+            this.Empdata.BackgroundColor = System.Drawing.Color.Silver;
             this.Empdata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Empdata.Location = new System.Drawing.Point(3, 0);
+            this.Empdata.Location = new System.Drawing.Point(3, 3);
             this.Empdata.Name = "Empdata";
             this.Empdata.RowHeadersWidth = 51;
             this.Empdata.RowTemplate.Height = 25;
-            this.Empdata.Size = new System.Drawing.Size(625, 302);
+            this.Empdata.Size = new System.Drawing.Size(625, 299);
             this.Empdata.TabIndex = 0;
             // 
             // atendance
@@ -257,15 +260,15 @@ namespace ASCI
             this.atendance.Controls.Add(this.attendancedata);
             this.atendance.Location = new System.Drawing.Point(4, 41);
             this.atendance.Name = "atendance";
-            this.atendance.Padding = new System.Windows.Forms.Padding(3);
-            this.atendance.Size = new System.Drawing.Size(631, 414);
+            this.atendance.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.atendance.Size = new System.Drawing.Size(632, 414);
             this.atendance.TabIndex = 2;
             this.atendance.Text = "Attendance";
             this.atendance.UseVisualStyleBackColor = true;
             // 
             // attendancedata
             // 
-            this.attendancedata.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(115)))), ((int)(((byte)(118)))));
+            this.attendancedata.BackgroundColor = System.Drawing.Color.Silver;
             this.attendancedata.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.attendancedata.Location = new System.Drawing.Point(-2, -2);
             this.attendancedata.Name = "attendancedata";
@@ -277,12 +280,24 @@ namespace ASCI
             // feedback
             // 
             this.feedback.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(115)))), ((int)(((byte)(118)))));
+            this.feedback.Controls.Add(this.dataGridView1);
             this.feedback.Location = new System.Drawing.Point(4, 41);
             this.feedback.Name = "feedback";
-            this.feedback.Padding = new System.Windows.Forms.Padding(3);
+            this.feedback.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.feedback.Size = new System.Drawing.Size(632, 414);
             this.feedback.TabIndex = 3;
             this.feedback.Text = "FeedBack";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.Silver;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(632, 416);
+            this.dataGridView1.TabIndex = 0;
             // 
             // settings
             // 
@@ -299,7 +314,7 @@ namespace ASCI
             this.settings.Controls.Add(this.changedid);
             this.settings.Location = new System.Drawing.Point(4, 41);
             this.settings.Name = "settings";
-            this.settings.Padding = new System.Windows.Forms.Padding(3);
+            this.settings.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.settings.Size = new System.Drawing.Size(632, 414);
             this.settings.TabIndex = 4;
             this.settings.Text = "Settings";
@@ -504,6 +519,8 @@ namespace ASCI
             ((System.ComponentModel.ISupportInitialize)(this.Empdata)).EndInit();
             this.atendance.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.attendancedata)).EndInit();
+            this.feedback.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.settings.ResumeLayout(false);
             this.settings.PerformLayout();
             this.ResumeLayout(false);
@@ -545,5 +562,6 @@ namespace ASCI
         private System.Windows.Forms.Button button10;
         public System.Windows.Forms.Label timetext;
         private System.Windows.Forms.DataGridView attendancedata;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

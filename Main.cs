@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -14,7 +9,6 @@ namespace ASCI
 {
     public partial class Main : Form
     {
-        ASCI asc = new ASCI();
         string tags = "";
         string dx_rx = "";
         string name_get = "";
@@ -23,27 +17,37 @@ namespace ASCI
         SQLiteDataReader dr;
         SerialPort sp = null;
         string sql = null;
-        Thread th , pages;
+        Thread th, pages;
         bool isclosed = false;
         public Main()
         {
             InitializeComponent();
-            setserial();
+            setports();
             c.connect();
         }
-        private void setserial()
+        private void setports()
         {
-            sp = new SerialPort("COM3", 9600);
-            try
+            string[] availablePorts = SerialPort.GetPortNames();
+            if (availablePorts.Length > 0)
             {
-                if (!sp.IsOpen)
+                string selectedPort = availablePorts[0]; // Select the first available port
+                sp = new SerialPort(selectedPort, 9600);
+                try
                 {
+                    // Open the serial port
                     sp.Open();
+                    startthread();
+                    MessageBox.Show("Connected to Port: " + selectedPort, "Port Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Couldn't Connect to Port: " + ex, "Port Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show("Couldn't Connect To Port Dueto: " + ex, "Port Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
+                MessageBox.Show("No Ports Found", "Port Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void admins()
@@ -108,7 +112,7 @@ namespace ASCI
         }
         private void startthread()
         {
-            if(isclosed)
+            if (isclosed)
             {
                 Close();
             }
@@ -150,7 +154,7 @@ namespace ASCI
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    name_get =  dr["Name"].ToString();
+                    name_get = dr["Name"].ToString();
                 }
             }
             catch (Exception ex)
@@ -209,63 +213,82 @@ namespace ASCI
         }
         private void getdata()
         {
-            string dx_rx = sp.ReadLine();
             c.connect();
-            while (Adminisfound(int.Parse(dx_rx)) || Memberisfound(int.Parse(dx_rx)))
+            while (true)
             {
-                string state = "";
-                string message = "";
-                if (Adminisfound(int.Parse(dx_rx)))
+                byte[] arr = new byte[5];
+                for (int i = 0; i < 5; i++)
                 {
-                    message = "Welcome Sir: " + name_get + "You Arrived at " +DateTime.Now.ToString("ddd // hh:mm:ss // dd:MM:yyy");
-                            settags(dx_rx);
-                            mainpage();
+                    arr[i] = (byte)sp.ReadByte();
                 }
-                else if (Memberisfound(int.Parse(dx_rx)))
+                dx_rx = Encoding.ASCII.GetString(arr);
+                if (Adminisfound(int.Parse(dx_rx)) || Memberisfound(int.Parse(dx_rx)))
                 {
-                    if(int.Parse(DateTime.Now.ToString("hh")) > 9 && int.Parse(DateTime.Now.ToString("mm")) > 30 && int.Parse(DateTime.Now.ToString("ss")) > 0)
+                    string state = "";
+                    string message = "";
+                    if (Adminisfound(int.Parse(dx_rx)))
                     {
-                        state = "Late";
+                        message = "Welcome Sir: " + name_get + "You Arrived at " + DateTime.Now.ToString("ddd // hh:mm:ss // dd:MM:yyy");
+                        settags(dx_rx);
+                        sp.Write("1");
+                        mainpage();
+                    }
+                    else if (Memberisfound(int.Parse(dx_rx)))
+                    {
+                        if (int.Parse(DateTime.Now.ToString("hh")) > 9 && int.Parse(DateTime.Now.ToString("mm")) > 30 && int.Parse(DateTime.Now.ToString("ss")) > 0)
+                        {
+                            state = "Late";
+                        }
+                        else
+                        {
+                            state = "Early";
+                        }
+                        message = "Welcome Sir: " + name_get + "You Arrived at " + DateTime.Now.ToString("ddd // hh:mm:ss // dd:MM:yyy") + " And You are " + state;
+                        sp.Write("1");
+                        Invoke((MethodInvoker)delegate
+                        {
+                            setattendance();
+                        });
+                    }
+                    // Invoke the UI update on the main thread
+                    if (richTextBox1.InvokeRequired)
+                    {
+                        if (richTextBox1.IsHandleCreated)
+                        {
+                            richTextBox1.Invoke((MethodInvoker)delegate
+                            {
+                                richTextBox1.Text = message;
+                            });
+                        }
+                        else
+                        {
+                            // The control's handle hasn't been created yet.
+                            // You can try using BeginInvoke instead.
+                            richTextBox1.BeginInvoke((MethodInvoker)delegate
+                            {
+                                richTextBox1.Text = message;
+                            });
+                        }
                     }
                     else
                     {
-                        state = "Early";
+                        richTextBox1.Text = message;
                     }
-                    message = "Welcome Sir: " + name_get + "You Arrived at " + DateTime.Now.ToString("ddd // hh:mm:ss // dd:MM:yyy") + " And You are " + state;
-                    Invoke((MethodInvoker)delegate
-                    {
-                        setattendance();
-                    }); 
-                }
-                // Invoke the UI update on the main thread
-                if (richTextBox1.InvokeRequired)
-                {
-                    if (richTextBox1.IsHandleCreated)
-                    {
-                        richTextBox1.Invoke((MethodInvoker)delegate
-                        {
-                            richTextBox1.Text = message;
-                        });
-                    }
-                    else
-                    {
-                        // The control's handle hasn't been created yet.
-                        // You can try using BeginInvoke instead.
-                        richTextBox1.BeginInvoke((MethodInvoker)delegate
-                        {
-                            richTextBox1.Text = message;
-                        });
-                    }
+
                 }
                 else
                 {
-                    richTextBox1.Text = message;
+                    MessageBox.Show("User Not Found Wanna Add Him ? His ID is: " + dx_rx);
+                    sp.Write("0");
                 }
-
-                dx_rx = sp.ReadLine();
+                for (int i = 0; i < 5; i++)
+                {
+                    arr[i] = (byte)sp.ReadByte();
+                }
+                dx_rx = Encoding.ASCII.GetString(arr);
+                Thread.Sleep(100);
             }
-            MessageBox.Show("User Not Found Wanna Add Him ? His ID is: " + dx_rx);
-             
+
         }
         private string getday()
         {
@@ -282,7 +305,7 @@ namespace ASCI
                     das = dr["Day"].ToString();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error in getting day of attendance data: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -311,11 +334,11 @@ namespace ASCI
                                     string updateSql = "UPDATE Attendance SET [Left] = @Left , [Type] = @Type WHERE Name = @Name AND Day = @Day";
                                     using (SQLiteCommand updateCmd = new SQLiteCommand(updateSql, c.getconnetion()))
                                     {
-                                        if(int.Parse(DateTime.Now.ToString("hh")) > 9 && int.Parse(DateTime.Now.ToString("mm")) > 30 && int.Parse(DateTime.Now.ToString("ss")) > 0)
+                                        if (int.Parse(DateTime.Now.ToString("hh")) > 9 && int.Parse(DateTime.Now.ToString("mm")) > 30 && int.Parse(DateTime.Now.ToString("ss")) > 0)
                                         {
                                             updateCmd.Parameters.AddWithValue("@Type", "Late");
                                         }
-                                        else if (int.Parse(DateTime.Now.ToString("hh"))  == 9 && int.Parse(DateTime.Now.ToString("mm")) == 30 && int.Parse(DateTime.Now.ToString("ss")) == 0)
+                                        else if (int.Parse(DateTime.Now.ToString("hh")) == 9 && int.Parse(DateTime.Now.ToString("mm")) == 30 && int.Parse(DateTime.Now.ToString("ss")) == 0)
                                         {
                                             updateCmd.Parameters.AddWithValue("@Type", "OnTime");
                                         }
@@ -370,11 +393,11 @@ namespace ASCI
             c.connect();
             string days = DateTime.Now.ToString("ddd:dd/MM/yyyy");
             string lefts = "Not Yet";
-            if(days.Equals(getday()) && lefts.Equals(getleft()))
+            if (days.Equals(getday()) && lefts.Equals(getleft()))
             {
                 checkiffound();
             }
-            else 
+            else
             {
                 if (!days.Equals(getday()))
                 {
@@ -401,8 +424,9 @@ namespace ASCI
         }
         private void Main_Load(object sender, EventArgs e)
         {
-            startthread();
+
         }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             Open();

@@ -51,10 +51,10 @@ namespace ASCI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(166, 22);
+            this.label1.Location = new System.Drawing.Point(163, 43);
             this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 65);
+            this.label1.Size = new System.Drawing.Size(167, 81);
             this.label1.TabIndex = 1;
             this.label1.Text = "ASCI";
             // 
@@ -77,13 +77,13 @@ namespace ASCI
             this.label2.Location = new System.Drawing.Point(436, 429);
             this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.Size = new System.Drawing.Size(38, 19);
             this.label2.TabIndex = 3;
             this.label2.Text = "V1.0";
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 41F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(99)))), ((int)(((byte)(101)))));
             this.ClientSize = new System.Drawing.Size(475, 450);

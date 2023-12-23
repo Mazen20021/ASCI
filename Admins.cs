@@ -23,6 +23,7 @@ namespace ASCI
         int aids = 0;
         int attended = 0;
         bool withkey = false;
+        int strikes = 0;
         private static List<int> generatedIDs = new List<int>(); // Keep track of generated IDs
         private List<string> empnames = new List<string>();
         public  System.Windows.Forms.Timer progtimer;
@@ -32,7 +33,9 @@ namespace ASCI
             InitializeComponent();
             settimer();
             bot("");
-           // fillattendancetable();
+            getstrikes();
+            //fillfeedback();
+            // fillattendancetable();
             //setserial();
         }
         public ASCI(string tags)
@@ -40,6 +43,8 @@ namespace ASCI
             InitializeComponent();
             settimer();
             bot("");
+            getstrikes();
+           // fillfeedback();
             //fillattendancetable();
             intailizedata(tags);
             withkey = true;
@@ -101,7 +106,7 @@ namespace ASCI
         }
         private int getattended()
         {
-            
+            c.connect();
             try
             {
                 sql = "Select Count(Name) From Attendance Where Arrived != 0";
@@ -364,9 +369,68 @@ namespace ASCI
                 MessageBox.Show("Error in inserting attendance data: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void filltablefeedback()
+        {
+            int rowsAffected = cmd.ExecuteNonQuery();
+            
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(cmd))
+                {
+                    DataTable dataTable = new DataTable();
+                    da.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable;
+                }   
+        }
+        private void fillfeedback()
+        {
+            c.connect();
+            try
+            {
+                sql = "INSERT INTO FeedBack (Name, Type, Day, Strikes, PenaltyPoints) " +
+                      "SELECT Name, Type, Day, @Strikes, @pp FROM Attendance " +
+                      "WHERE NOT EXISTS (SELECT 1 FROM FeedBack WHERE FeedBack.Name = Attendance.Name AND FeedBack.Day = Attendance.Day)";
+                cmd = new SQLiteCommand(sql, c.getconnetion());
+                cmd.Parameters.AddWithValue("@Strikes", strikes.ToString());
+                if (getstrikes() >= 3)
+                {
+                    cmd.Parameters.AddWithValue("@pp", -300);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@pp", 0);
+                }
+                cmd.ExecuteNonQuery();
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Filling FeedBack Table data: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int getstrikes()
+        {
+            c.connect();
+            try
+            {
+                sql = "SELECT COUNT(Type) FROM Attendance WHERE Type = @Late";
+                cmd = new SQLiteCommand(sql, c.getconnetion());
+                cmd.Parameters.AddWithValue("@Late", "Late");
+                strikes = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error in Getting Strikes data: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return strikes;
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             Tapspage.SelectedTab = feedback;
+
+            fillfeedback();
+            filltablefeedback();
+            
+
         }
         private void button3_Click(object sender, EventArgs e)
         {
