@@ -34,9 +34,6 @@ namespace ASCI
             settimer();
             bot("");
             getstrikes();
-            //fillfeedback();
-            // fillattendancetable();
-            //setserial();
         }
         public ASCI(string tags)
         {
@@ -44,8 +41,6 @@ namespace ASCI
             settimer();
             bot("");
             getstrikes();
-           // fillfeedback();
-            //fillattendancetable();
             intailizedata(tags);
             withkey = true;
 
@@ -109,10 +104,11 @@ namespace ASCI
             c.connect();
             try
             {
-                sql = "Select Count(Name) From Attendance Where Arrived != 0";
+                sql = "Select Count(Name) From Attendance Where Arrived != @ar AND Day=@d";
                 cmd = new SQLiteCommand(sql, c.getconnetion());
+                cmd.Parameters.AddWithValue("@ar", "0");
+                cmd.Parameters.AddWithValue("@d", DateTime.Now.ToString("ddd:dd/MM/yyyy"));
                 attended = Convert.ToInt32(cmd.ExecuteScalar());
-                
             }catch(Exception ex)
             {
                 MessageBox.Show("Error Couldn't Get Count of Attended Dueto: " + ex, "SQL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -124,8 +120,10 @@ namespace ASCI
             List<string> names_attneded = new List<string>();
             try
             {
-                sql = "Select Name from Attendance Where Arrived != 0";
+                sql = "Select Name from Attendance Where Arrived != @ar AND Day = @day";
                 cmd = new SQLiteCommand(sql, c.getconnetion());
+                cmd.Parameters.AddWithValue("@ar", "0");
+                cmd.Parameters.AddWithValue("@day", DateTime.Now.ToString("ddd:dd/MM/yyyy"));
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -144,6 +142,7 @@ namespace ASCI
             {
                 sql = "Select Name from Attendance Where Arrived = 0";
                 cmd = new SQLiteCommand(sql, c.getconnetion());
+                //cmd.Parameters.AddWithValue("@day", DateTime.Now.ToString("ddd:dd/MM/yyyy"));
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -176,7 +175,7 @@ namespace ASCI
                 if (message.Contains("Empolyees") || message.Contains("1"))
                 {
                     BotResponse.Text += "[Bot01]: Here's what you asked for, Sir " + nametext.Text + " (Empolyees)\n";
-                    BotResponse.Text += "[Bot01]: You have " + count + " employees\n";
+                    BotResponse.Text += "[Bot01]: You have (" + count + ") employees\n";
                     for (int i = 0; i < count; i++)
                     {
                         BotResponse.Text += "[Bot01]: Their names are: " + empNames[i] + "\n";
@@ -192,7 +191,7 @@ namespace ASCI
                        BotResponse.Text += "[Bot01]: They are (" + attempNames[j] + ")\n";
                     }
                     BotResponse.Text += "[Bot01]: There are " + (count - getattended()) + " Who Didn't come Today\n";
-                    for (int t = 0; t < count - getattended(); t++)
+                    for (int t = 0; t < Math.Abs(count - getattended()); t++)
                     {
                         BotResponse.Text += "[Bot01]: They are (" + attempnotNames[t] + ")\n";
                     }
@@ -369,44 +368,6 @@ namespace ASCI
                 MessageBox.Show("Error in inserting attendance data: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void filltablefeedback()
-        {
-            int rowsAffected = cmd.ExecuteNonQuery();
-            
-                using (SQLiteDataAdapter da = new SQLiteDataAdapter(cmd))
-                {
-                    DataTable dataTable = new DataTable();
-                    da.Fill(dataTable);
-                    dataGridView1.DataSource = dataTable;
-                }   
-        }
-        private void fillfeedback()
-        {
-            c.connect();
-            try
-            {
-                sql = "INSERT INTO FeedBack (Name, Type, Day, Strikes, PenaltyPoints) " +
-                      "SELECT Name, Type, Day, @Strikes, @pp FROM Attendance " +
-                      "WHERE NOT EXISTS (SELECT 1 FROM FeedBack WHERE FeedBack.Name = Attendance.Name AND FeedBack.Day = Attendance.Day)";
-                cmd = new SQLiteCommand(sql, c.getconnetion());
-                cmd.Parameters.AddWithValue("@Strikes", strikes.ToString());
-                if (getstrikes() >= 3)
-                {
-                    cmd.Parameters.AddWithValue("@pp", -300);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@pp", 0);
-                }
-                cmd.ExecuteNonQuery();
-               
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error Filling FeedBack Table data: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private int getstrikes()
         {
             c.connect();
@@ -422,15 +383,6 @@ namespace ASCI
                 MessageBox.Show("Error in Getting Strikes data: " + ex.Message, "SQL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return strikes;
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Tapspage.SelectedTab = feedback;
-
-            fillfeedback();
-            filltablefeedback();
-            
-
         }
         private void button3_Click(object sender, EventArgs e)
         {
@@ -702,5 +654,9 @@ namespace ASCI
             settimer();
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Tapspage.SelectedTab = MainPage;
+        }
     }
 }

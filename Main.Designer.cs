@@ -34,6 +34,8 @@ namespace ASCI
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.COMS = new System.Windows.Forms.Label();
+            this.Portsbox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -51,10 +53,10 @@ namespace ASCI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(163, 43);
+            this.label1.Location = new System.Drawing.Point(160, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 81);
+            this.label1.Size = new System.Drawing.Size(134, 65);
             this.label1.TabIndex = 1;
             this.label1.Text = "ASCI";
             // 
@@ -62,9 +64,9 @@ namespace ASCI
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(117, 355);
+            this.button1.Location = new System.Drawing.Point(115, 342);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(229, 47);
+            this.button1.Size = new System.Drawing.Size(229, 64);
             this.button1.TabIndex = 2;
             this.button1.Text = "No Key Login";
             this.button1.UseVisualStyleBackColor = true;
@@ -77,16 +79,43 @@ namespace ASCI
             this.label2.Location = new System.Drawing.Point(436, 429);
             this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 19);
+            this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "V1.0";
             // 
+            // COMS
+            // 
+            this.COMS.AutoSize = true;
+            this.COMS.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.COMS.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.COMS.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.COMS.Location = new System.Drawing.Point(12, 424);
+            this.COMS.Name = "COMS";
+            this.COMS.Size = new System.Drawing.Size(47, 19);
+            this.COMS.TabIndex = 4;
+            this.COMS.Text = "label3";
+            this.COMS.Click += new System.EventHandler(this.COMS_Click);
+            // 
+            // Portsbox
+            // 
+            this.Portsbox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Portsbox.FormattingEnabled = true;
+            this.Portsbox.Location = new System.Drawing.Point(115, 421);
+            this.Portsbox.Name = "Portsbox";
+            this.Portsbox.Size = new System.Drawing.Size(229, 25);
+            this.Portsbox.TabIndex = 5;
+            this.Portsbox.Text = "Choose Port";
+            this.Portsbox.Visible = false;
+            this.Portsbox.SelectedIndexChanged += new System.EventHandler(this.Portsbox_SelectedIndexChanged);
+            // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 41F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(99)))), ((int)(((byte)(101)))));
             this.ClientSize = new System.Drawing.Size(475, 450);
+            this.Controls.Add(this.Portsbox);
+            this.Controls.Add(this.COMS);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
@@ -110,5 +139,7 @@ namespace ASCI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label COMS;
+        private System.Windows.Forms.ComboBox Portsbox;
     }
 }
