@@ -16,9 +16,8 @@ ASCI is an advanced attendance system that automates the process of tracking emp
 
 ## Installation
 To install ASCI, follow these steps:
-1. Download the ASCI desktop application setup file or just run it from bin file.
-2. Ensure that the .NET Framework 3.8 or a higher version is installed on your system.
-3. Once the installation is complete, launch ASCI and configure the necessary settings, including database connection details and hardware integration.
+1. It is a source Code You can Modify it or build it then run
+
 
 ## Usage
 1. Provide each employee with a unique key tag containing an ID.
