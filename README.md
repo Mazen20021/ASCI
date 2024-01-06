@@ -40,12 +40,21 @@ ASCI is the result of collaborative efforts by a team of dedicated professionals
 Experience the convenience and efficiency of ASCI in revolutionizing your attendance management process.
  
 ## Snapshots
-![Main_Page5](https://github.com/Mazen20021/ASCI/assets/131156076/5e2ac0b0-0090-4bf6-8486-b3d7132c98cc)
-![Main_Page4](https://github.com/Mazen20021/ASCI/assets/131156076/e86f8ec5-8770-45e9-aa67-16b7cd60f8f9)
-![Main_Page3](https://github.com/Mazen20021/ASCI/assets/131156076/e2e8b471-c2b7-40bb-8daa-4c0fee2825fc)
-![Main_Page2](https://github.com/Mazen20021/ASCI/assets/131156076/2353d3a1-0f57-4810-a726-6ed17165e047)
+- Login
 ![LogIn Page](https://github.com/Mazen20021/ASCI/assets/131156076/04544874-d23f-41e6-ba53-fc6c634f6778)
+- Main Page
 ![Main_Page1](https://github.com/Mazen20021/ASCI/assets/131156076/fcf18c47-0df2-486e-a2c7-a4e668f118d8)
+- ChatBot First Option
+![Main_Page2](https://github.com/Mazen20021/ASCI/assets/131156076/2353d3a1-0f57-4810-a726-6ed17165e047)
+- ChatBot Second Option
+![Main_Page3](https://github.com/Mazen20021/ASCI/assets/131156076/e2e8b471-c2b7-40bb-8daa-4c0fee2825fc)
+- ChatBot Third Option
+![Main_Page4](https://github.com/Mazen20021/ASCI/assets/131156076/e86f8ec5-8770-45e9-aa67-16b7cd60f8f9)
+- ChatBot Fourth Option
+![Main_Page5](https://github.com/Mazen20021/ASCI/assets/131156076/5e2ac0b0-0090-4bf6-8486-b3d7132c98cc)
+- Settings
 ![Settings Page](https://github.com/Mazen20021/ASCI/assets/131156076/61ce5ac6-23e7-4210-8abc-1c44b1c79061)
+- Attendance
 ![Attendance page](https://github.com/Mazen20021/ASCI/assets/131156076/2da1ec7d-7933-4648-a039-3c3566128eba)
+- Employee
 ![Employee Page](https://github.com/Mazen20021/ASCI/assets/131156076/0f790777-dacf-40c2-b71d-3d55854d6ef6)
